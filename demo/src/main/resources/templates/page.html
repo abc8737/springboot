@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${content}"></p>
+<h2>This is Spring page</h2>
+
+<tr th:each="city:${citys}">
+    <p th:text="${city}">
+    </p><br>
+</tr>
+<p th:text="${users}"></p>
+</body>
+</html>

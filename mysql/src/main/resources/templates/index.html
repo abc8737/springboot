@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta datatype="application/json">
+    <title>Springboot用户</title>
+</head>
+<body>
+<h1 th:inline="text">第一个SpringBoot静态界面</h1>
+
+<table border="1" bordercolor="#a0c6e5" style="border-collapse:collapse;">
+    <thead>
+    <tr>
+        <th>id序号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody th:each="user:${userList}">
+    <tr th:id="${user.id}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.age}"></td>
+        <td><a th:href="@{/deleteById(id=${user.id})}">删除</a></td>
+        <!--<td th:onclick="deleteUser(${user.id})" th:type="button">删除</td>-->
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" onclick="clickJson()" value="点击我">
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    function clickJson() {
+        var jsonObj = JSON.parse("{\"id\":\"123\"}");
+        alert(jsonObj.id);
+    }
+
+    /*function deleteUser(_id) {
+        alert("你选择的用户id是:" + _id);
+    }*/
+
+</script>
