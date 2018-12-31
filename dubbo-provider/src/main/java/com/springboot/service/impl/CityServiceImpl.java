@@ -18,8 +18,9 @@ public class CityServiceImpl implements CityService {
     private CityMapper cityMapper;
 
     public City findCityByName(String cityName) {
-        String city = cityName != null ? cityName : "城市名未知";
-        return new City(1L, 2L, city, "地处中国中部");
+//        String city = cityName != null ? cityName : "城市名未知";
+//        return new City(1L, 2L, city, "地处中国中部");
+        return cityMapper.findCityByName(cityName);
     }
 
     @Override

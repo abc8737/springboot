@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta datatype="application/json">
+    <title>Springboot使用xml模式的mybatis</title>
+</head>
+<body>
+<!--<h1 th:inline="text">第一个SpringBoot静态界面</h1>-->
+
+<table border="1" bordercolor="#a0c6e5" style="border-collapse:collapse;">
+    <thead>
+    <tr>
+        <th>id序号</th>
+        <th>用户名</th>
+        <th>真实姓名</th>
+        <th>密码</th>
+        <th>创建时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody th:each="user:${userList}">
+    <tr th:id="${user.id}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.realname}"></td>
+        <td th:text="${user.rpassword}"></td>
+        <td th:text="${user.addtime}"></td>
+        <td><a th:href="@{/user/deleteById(id=${user.id})}">删除</a></td>
+        <td><input class="button" onclick="deleteUser(${user.id})" type="button">删除(二)</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<input type="button" onclick="clickJson()" value="点击我"><br>
+<form id="addForm" th:action="@{/user/addOne}" method="post">
+    <table>
+        <thead>
+        <th>用 户 名：</th>
+        <th>姓 名：</th>
+        <th>密 码：</th>
+        <th>确 认 密 码：</th>
+        </thead>
+        <tbody>
+        <td><input type="text" name="username"></td>
+        <td><input type="text" name="realname"></td>
+        <td><input type="password" name="password"></td>
+        <td><input type="password" name="rpassword"></td>
+        </tbody>
+    </table>
+    <input type="submit" value="添加" class="button">
+</form>
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+    function clickJson() {
+        var jsonObj = JSON.parse("{\"id\":\"123\"}");
+        alert(jsonObj.id);
+    }
+
+    function deleteUser(_id) {
+        if(confirm("确定要删除？")){
+            document.getElementById("addForm").hidden;
+        }
+        alert("你选择的用户id是:" + _id);
+    }
+
+</script>

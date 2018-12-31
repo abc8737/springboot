@@ -14,5 +14,34 @@
     </p><br>
 </tr>
 <p th:text="${users}"></p>
+<input type="button" class="button" value="jsonp回调" onclick="callback()">
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+    function callback() {
+        $.ajax({
+            url: '/call',
+            type: 'POST',
+            data: {
+                jsonpCallback: 'callBack'
+            },
+            dataType: 'jsonp',
+            jsonpCallback: 'callBack',
+            success: function (data) {
+                console.log("jsonp回调成功...");
+                console.log(data);
+            }
+        });
+    }
+
+    function callBack(resp) {
+        var info = eval("(" + resp + ")");
+        console.log(info);
+        alert(info.name + "\n" + info.age + "\n" + info.gender);
+    }
+
+</script>

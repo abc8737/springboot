@@ -6,6 +6,7 @@ import com.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -33,8 +34,29 @@ public class UserController {
             return "Insert Error";
     }
 
+    /**
+     * 访问地址格式：http://localhost:8080/findUser?id=3
+     * @RequestParam("id")
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/findUser")
     public String findUser(Model model, @RequestParam("id") String id) {
+        User user = userService.findById(id);
+        model.addAttribute("userList", user);
+        return "index";
+    }
+
+    /**
+     * 访问地址格式：http://localhost:8080/findUserById/3
+     * @PathVariable("id")  地址访问风格类似于Restful
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/findUserById/{id}")
+    public String findUserById(Model model, @PathVariable("id") String id) {
         User user = userService.findById(id);
         model.addAttribute("userList", user);
         return "index";
